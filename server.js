@@ -20,5 +20,5 @@ const app = express();
 
 
 app.listen(PORT, () =>
-  console.log(`Express server listening on port ${PORT}!`)
+  console.log(`App listening on port ${PORT}!`)
 );
