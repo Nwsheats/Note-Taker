@@ -1,25 +1,22 @@
 const express = require('express');
-const api = require('./routes/apiroutes')
+const apiRoutes = require('./routes/apiroutes')
+const htmlRoutes = require('./routes/htmlroutes')
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 
-app.use(express.static('public'));
+
 
 //routes
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 // app.use('/api', api);
 
-
-
-
-
-
-
-
+app.use('/api', apiRoutes)
+app.use('/api', htmlRoutes)
 
 
 
