@@ -16,7 +16,7 @@ app.use(express.static('public'));
 // app.use('/api', api);
 
 app.use('/api', apiRoutes)
-app.use('/api', htmlRoutes)
+app.use('/', htmlRoutes)
 
 
 
