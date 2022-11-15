@@ -2,7 +2,7 @@
     {
         "title": "Test Title",
         "text": "Test text",
-        "id": "011128"
+        "note_id": "011128"
     },
     {
         "title": "Nathan",
@@ -13,5 +13,10 @@
         "title": "Note 1",
         "text": "Delete this note hopefully\n",
         "note_id": "f35a"
+    },
+    {
+        "title": "Here is another note",
+        "text": "Test note",
+        "note_id": "d5bd"
     }
 ]

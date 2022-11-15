@@ -3,6 +3,8 @@ const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils
 const router = require('express').Router();
 const fs = require('fs')
 const uuid = require('../helpers/uuid');
+const notes = require('../db/db.json')
+
 
 
 router.get('/notes', (req, res) => {
@@ -19,7 +21,7 @@ router.post('/notes', (req, res) => {
       const newNote = {
         title,
         text,
-        id: uuid(),
+        note_id: uuid(),
       };
   
       readAndAppend(newNote, './db/db.json');
@@ -30,19 +32,25 @@ router.post('/notes', (req, res) => {
   });
 
 
-router.delete('/notes:id', (req, res) => {
-    const noteId = req.params.id;
+router.get('/notes/:note_id', (req, res) => {
+    const result = req.params.note_id;
+    if (result) {
+        res.json(result);
+    } else {
+        res.send(404);
+    }
+});
+
+router.delete('/notes/:note_id', (req, res) => {
+    const noteId = req.params.note_id;
     readFromFile('./db/db.json')
       .then((data) => JSON.parse(data))
       .then((json) => {
-        const result = json.filter((note) => note.id !== noteId);
+        const result = json.filter((note) => note.note_id !== noteId);
         writeToFile('./db/db.json', result);
         res.json(`Item ${noteId} has been deleted`);
       });
   });
-
-
-
 
 
 module.exports = router;
