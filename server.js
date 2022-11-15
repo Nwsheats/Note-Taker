@@ -6,9 +6,6 @@ const app = express();
 
 
 
-
-//routes
-
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

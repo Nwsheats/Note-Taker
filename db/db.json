@@ -1,6 +1,17 @@
 [
     {
-        "title":"Test Title",
-        "text":"Test text"
+        "title": "Test Title",
+        "text": "Test text",
+        "id": "011128"
+    },
+    {
+        "title": "Nathan",
+        "text": "Finish the project",
+        "note_id": "696a"
+    },
+    {
+        "title": "Note 1",
+        "text": "Delete this note hopefully\n",
+        "note_id": "f35a"
     }
 ]
