@@ -22,4 +22,3 @@ app.listen(PORT, () =>
 
 
 // Heroku link: https://vast-sea-91544.herokuapp.com/
-// https://git.heroku.com/vast-sea-91544.git

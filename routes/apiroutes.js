@@ -1,10 +1,7 @@
-const path = require('path');
 const { readFromFile, readAndAppend, writeToFile } = require('../helpers/fsUtils');
 const router = require('express').Router();
-const fs = require('fs')
 const uuid = require('../helpers/uuid');
 const notes = require('../db/db.json')
-
 
 
 router.get('/notes', (req, res) => {
@@ -21,7 +18,8 @@ router.post('/notes', (req, res) => {
       const newNote = {
         title,
         text,
-        note_id: uuid(),
+        id: uuid(),
+
       };
   
       readAndAppend(newNote, './db/db.json');
@@ -32,21 +30,29 @@ router.post('/notes', (req, res) => {
   });
 
 
-router.get('/notes/:note_id', (req, res) => {
-    const result = req.params.note_id;
-    if (result) {
-        res.json(result);
+  router.get('/notes/:id', (req, res) => {
+    if (req.params.id) {
+      console.info(`${req.method} request received to get a single note`);
+      const noteId = req.params.id;
+      for (let i = 0; i < notes.length; i++) {
+        const currentNote = notes[i];
+        if (currentNote.id === noteId) {
+          res.status(200).json(currentNote);
+          return;
+        }
+      }
+      res.status(404).send('Note not found');
     } else {
-        res.send(404);
+      res.status(400).send('Note ID not provided');
     }
-});
+  });
 
-router.delete('/notes/:note_id', (req, res) => {
-    const noteId = req.params.note_id;
+router.delete('/notes/:id', (req, res) => {
+    const noteId = req.params.id;
     readFromFile('./db/db.json')
       .then((data) => JSON.parse(data))
       .then((json) => {
-        const result = json.filter((note) => note.note_id !== noteId);
+        const result = json.filter((note) => note.id !== noteId);
         writeToFile('./db/db.json', result);
         res.json(`Item ${noteId} has been deleted`);
       });
